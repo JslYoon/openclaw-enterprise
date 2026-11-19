@@ -1,0 +1,17 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "oce-rhdh",
+  "version": "0.1.0",
+  "description": "RHDH integration: catalog reads and TechDocs publishing from a dedicated OpenClaw worker.",
+  "author": { "name": "OpenClaw Enterprise" },
+  "repository": "https://github.com/openclaw/openclaw-enterprise",
+  "license": "MIT",
+  "extensions": {
+    "ai.openclaw.oce": {
+      "id": "occ-plugin:rhdh",
+      "displayName": "Red Hat Developer Hub",
+      "policyScope": "enablement_only",
+      "release": "./ai.openclaw.oce/release.json"
+    }
+  }
+}

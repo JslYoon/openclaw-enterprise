@@ -1,0 +1,42 @@
+{
+  "operationsSha256": "sha256:<unpinned-placeholder>",
+  "release": "rhdh-scaffold-v0",
+  "placement": {
+    "harnessId": "openclaw",
+    "mode": "dedicated",
+    "computeImplementations": ["occ/kubernetes"]
+  },
+  "capabilities": {
+    "gateway": ["skill"],
+    "harness": ["cli"]
+  },
+  "credentials": {
+    "account": {
+      "label": "RHDH backend token",
+      "issuer": "https://rhdh.example.com",
+      "tokenEndpoint": "https://rhdh.example.com/placeholder/token-endpoint",
+      "delivery": {
+        "role": "harness",
+        "env": "RHDH_TOKEN",
+        "presentation": "bearer"
+      }
+    }
+  },
+  "skill": "rhdh-catalog",
+  "skillSha256": "sha256:<unpinned-placeholder>",
+  "executable": "tbd-cli",
+  "version": "0.0.0",
+  "artifacts": {
+    "linux-amd64": {
+      "url": "https://placeholder.invalid/oce-rhdh/tbd-cli-0.0.0-linux-amd64.tar.gz",
+      "archiveSha256": "sha256:<unpinned-placeholder>",
+      "binarySha256": "sha256:<unpinned-placeholder>"
+    },
+    "linux-arm64": {
+      "url": "https://placeholder.invalid/oce-rhdh/tbd-cli-0.0.0-linux-arm64.tar.gz",
+      "archiveSha256": "sha256:<unpinned-placeholder>",
+      "binarySha256": "sha256:<unpinned-placeholder>"
+    }
+  },
+  "runtimeDirectory": "/usr/local/lib/oce/plugins/rhdh"
+}

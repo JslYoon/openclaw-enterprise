@@ -1,0 +1,95 @@
+{
+  "rhdhVersion": "tbd-cli",
+  "note": "Scaffold operation map. No rhdh CLI exists yet. Command names, hosts, and paths are examples pending the executable decision (custom wrapper CLI versus curl or Node scripts). The RHDH origin is a placeholder for the deployed RHDH base URL. The git origin is a placeholder for the selected git provider.",
+  "commands": {
+    "catalog entity get": { "status": "rest", "operations": ["rhdh:catalog/getEntityByName"] },
+    "catalog entity relations": { "status": "rest", "operations": ["rhdh:catalog/getEntityRelations"] },
+    "catalog entities query": { "status": "rest", "operations": ["rhdh:catalog/queryEntities"] },
+    "techdocs publish": {
+      "status": "rest",
+      "operations": [
+        "git:getRepositoryFile",
+        "git:createBranch",
+        "git:commitFiles",
+        "git:createPullRequest"
+      ]
+    },
+    "dependencies advisories": { "status": "rest", "operations": ["git:getRepositoryFile", "osv:queryBatch"] }
+  },
+  "operations": {
+    "rhdh:catalog/getEntityByName": {
+      "method": "GET",
+      "origin": "https://rhdh.example.com",
+      "path": "/api/catalog/entities/by-name/{kind}/{namespace}/{name}",
+      "pathParameters": {
+        "kind": { "type": "string", "required": true },
+        "namespace": { "type": "string", "required": true },
+        "name": { "type": "string", "required": true }
+      }
+    },
+    "rhdh:catalog/getEntityRelations": {
+      "method": "GET",
+      "origin": "https://rhdh.example.com",
+      "path": "/api/catalog/entities/by-name/{kind}/{namespace}/{name}/relations",
+      "pathParameters": {
+        "kind": { "type": "string", "required": true },
+        "namespace": { "type": "string", "required": true },
+        "name": { "type": "string", "required": true }
+      }
+    },
+    "rhdh:catalog/queryEntities": {
+      "method": "GET",
+      "origin": "https://rhdh.example.com",
+      "path": "/api/catalog/entities/by-query",
+      "query": {
+        "filter": { "type": "string", "repeated": true },
+        "fields": { "type": "string", "repeated": true },
+        "limit": { "type": "integer" },
+        "cursor": { "type": "string" }
+      }
+    },
+    "git:getRepositoryFile": {
+      "method": "GET",
+      "origin": "https://git.example.com",
+      "path": "/repos/{owner}/{repo}/contents/{path}",
+      "pathParameters": {
+        "owner": { "type": "string", "required": true },
+        "repo": { "type": "string", "required": true },
+        "path": { "type": "string", "required": true }
+      }
+    },
+    "git:createBranch": {
+      "method": "POST",
+      "origin": "https://git.example.com",
+      "path": "/repos/{owner}/{repo}/git/refs",
+      "pathParameters": {
+        "owner": { "type": "string", "required": true },
+        "repo": { "type": "string", "required": true }
+      }
+    },
+    "git:commitFiles": {
+      "method": "PUT",
+      "origin": "https://git.example.com",
+      "path": "/repos/{owner}/{repo}/contents/{path}",
+      "pathParameters": {
+        "owner": { "type": "string", "required": true },
+        "repo": { "type": "string", "required": true },
+        "path": { "type": "string", "required": true }
+      }
+    },
+    "git:createPullRequest": {
+      "method": "POST",
+      "origin": "https://git.example.com",
+      "path": "/repos/{owner}/{repo}/pulls",
+      "pathParameters": {
+        "owner": { "type": "string", "required": true },
+        "repo": { "type": "string", "required": true }
+      }
+    },
+    "osv:queryBatch": {
+      "method": "POST",
+      "origin": "https://api.osv.dev",
+      "path": "/v1/querybatch"
+    }
+  }
+}
