@@ -29,13 +29,13 @@
   "artifacts": {
     "linux-amd64": {
       "url": "https://raw.githubusercontent.com/JslYoon/openclaw-enterprise/rhdh-plugin/apps/controller/plugins/oce-rhdh/bin/rhdh.mjs",
-      "archiveSha256": "a183129c3e76352ae87e9bf03afd3f4e7841375d3d5d287bd332123156a84e95",
-      "binarySha256": "a183129c3e76352ae87e9bf03afd3f4e7841375d3d5d287bd332123156a84e95"
+      "archiveSha256": "b635a54642604e502291446dfc9a997f713065bbf42f8df1fe7ec157737b8b3d",
+      "binarySha256": "b635a54642604e502291446dfc9a997f713065bbf42f8df1fe7ec157737b8b3d"
     },
     "linux-arm64": {
       "url": "https://raw.githubusercontent.com/JslYoon/openclaw-enterprise/rhdh-plugin/apps/controller/plugins/oce-rhdh/bin/rhdh.mjs",
-      "archiveSha256": "a183129c3e76352ae87e9bf03afd3f4e7841375d3d5d287bd332123156a84e95",
-      "binarySha256": "a183129c3e76352ae87e9bf03afd3f4e7841375d3d5d287bd332123156a84e95"
+      "archiveSha256": "b635a54642604e502291446dfc9a997f713065bbf42f8df1fe7ec157737b8b3d",
+      "binarySha256": "b635a54642604e502291446dfc9a997f713065bbf42f8df1fe7ec157737b8b3d"
     }
   },
   "runtimeDirectory": "/usr/local/lib/oce/plugins/rhdh"
