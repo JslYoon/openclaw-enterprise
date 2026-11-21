@@ -12,6 +12,7 @@ import { ConfigurationHarnessError } from "@openclaw-enterprise/occ";
 import { asRecord, isNonEmptyString } from "@openclaw-enterprise/utils";
 import { exactDnsName } from "../credential-source-endpoint.ts";
 import { googleWorkspaceCredentialPolicy } from "./google-workspace/credential-policy.ts";
+import { rhdhCredentialPolicy } from "./rhdh/credential-policy.ts";
 import { Type } from "typebox";
 import { Check } from "typebox/value";
 
@@ -280,7 +281,7 @@ export const managedCliInstalls = managedInstalls.filter((install) => install.ki
 export const managedMcpInstalls = managedInstalls.filter((install) => install.kind === "mcp");
 
 // CLI request semantics belong to each reviewed connector; the catalog owns iteration.
-const cliCredentialPolicies = [googleWorkspaceCredentialPolicy];
+const cliCredentialPolicies = [googleWorkspaceCredentialPolicy, rhdhCredentialPolicy];
 const cliCredentialPolicy = (install: ManagedCliInstall) =>
   cliCredentialPolicies.find(({ packageName }) => packageName === install.packageName);
 
