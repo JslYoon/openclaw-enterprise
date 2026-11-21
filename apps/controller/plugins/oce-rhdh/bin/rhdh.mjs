@@ -54,14 +54,24 @@ function catalogRequest(path, query) {
   }
   return new Promise((resolve, reject) => {
     const request = httpRequest(
-      { hostname: url.hostname, port: url.port || 80, path: `${url.pathname}${url.search}`, method: "GET", headers: { authorization: `Bearer ${token()}`, accept: "application/json" } },
+      {
+        hostname: url.hostname,
+        port: url.port || 80,
+        path: `${url.pathname}${url.search}`,
+        method: "GET",
+        headers: { authorization: `Bearer ${token()}`, accept: "application/json" },
+      },
       (response) => {
         const chunks = [];
         response.on("data", (chunk) => chunks.push(chunk));
         response.on("end", () => {
           const body = Buffer.concat(chunks).toString("utf8");
           if (response.statusCode === 401 || response.statusCode === 403) {
-            reject(new Error(`RHDH refused the request (HTTP ${response.statusCode}). Check the service token.`));
+            reject(
+              new Error(
+                `RHDH refused the request (HTTP ${response.statusCode}). Check the service token.`,
+              ),
+            );
             return;
           }
           if (response.statusCode < 200 || response.statusCode >= 300) {
@@ -94,7 +104,12 @@ const FIELDS = [
 function project(entity, fields) {
   const selected = {};
   for (const field of fields) {
-    const value = field.split(".").reduce((node, part) => (node === undefined || node === null ? undefined : node[part]), entity);
+    const value = field
+      .split(".")
+      .reduce(
+        (node, part) => (node === undefined || node === null ? undefined : node[part]),
+        entity,
+      );
     if (value !== undefined) {
       selected[field] = value;
     }
@@ -103,7 +118,10 @@ function project(entity, fields) {
 }
 
 function parseFields(value) {
-  const requested = (value ?? FIELDS.join(",")).split(",").map((field) => field.trim()).filter(Boolean);
+  const requested = (value ?? FIELDS.join(","))
+    .split(",")
+    .map((field) => field.trim())
+    .filter(Boolean);
   return requested.length ? requested : FIELDS;
 }
 
@@ -123,7 +141,16 @@ function printJson(value) {
 }
 
 async function query(args) {
-  const params = new Map(args.map((arg, index) => (arg.startsWith("--") ? [arg.replace(/^--/, "").replace(/^-/, ""), args[index + 1]?.startsWith("--") ? undefined : args[index + 1]] : [null, null])));
+  const params = new Map(
+    args.map((arg, index) =>
+      arg.startsWith("--")
+        ? [
+            arg.replace(/^--/, "").replace(/^-/, ""),
+            args[index + 1]?.startsWith("--") ? undefined : args[index + 1],
+          ]
+        : [null, null],
+    ),
+  );
   // Backstage takes each filter term as a repeated query parameter: filter=kind=Component.
   const filters = args
     .map((arg, index) => (arg === "--filter" ? args[index + 1] : undefined))
