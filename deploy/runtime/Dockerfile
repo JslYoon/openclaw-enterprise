@@ -534,6 +534,21 @@ RUN --mount=type=secret,id=build-ca,required=false \
     mkdir -p /usr/local/lib/oce/plugins/google/bin; \
     node /tmp/install-gog.mts /usr/local/lib/oce/plugins/google "linux-${TARGETARCH:-amd64}" /usr/local/lib/oce/plugins/google/bin /tmp/download-pinned.sh
 
+# oce-rhdh ships an in-repo Node CLI; verify its release digests at build time.
+COPY apps/controller/plugins/oce-rhdh/skills/ /usr/local/lib/oce/plugins/rhdh/skills/
+COPY apps/controller/plugins/oce-rhdh/ai.openclaw.oce/release.json /usr/local/lib/oce/plugins/rhdh/release.json
+COPY apps/controller/plugins/oce-rhdh/bin/rhdh.mjs /usr/local/lib/oce/plugins/rhdh/bin/rhdh
+RUN set -eu; \
+    chmod 0755 /usr/local/lib/oce/plugins/rhdh/bin/rhdh; \
+    node --input-type=module -e ' \
+      import { createHash } from "node:crypto"; import { readFileSync } from "node:fs"; \
+      const digest = (path) => createHash("sha256").update(readFileSync(path)).digest("hex"); \
+      const release = JSON.parse(readFileSync("/usr/local/lib/oce/plugins/rhdh/release.json", "utf8")); \
+      if (digest("/usr/local/lib/oce/plugins/rhdh/skills/" + release.skill + "/SKILL.md") !== release.skillSha256) throw new Error("oce-rhdh skill digest mismatch"); \
+      if (digest("/usr/local/lib/oce/plugins/rhdh/bin/rhdh") !== release.artifacts["linux-amd64"].binarySha256) throw new Error("oce-rhdh executable digest mismatch"); \
+    '
+RUN node --check /usr/local/lib/oce/plugins/rhdh/bin/rhdh
+
 COPY apps/controller/plugins/ /usr/local/lib/oce/plugin-catalog/
 
 COPY --from=openclaw-runtime-assets /out/ /opt/oce/runtime/

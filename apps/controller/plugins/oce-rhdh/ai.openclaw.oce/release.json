@@ -1,6 +1,6 @@
 {
-  "operationsSha256": "sha256:<unpinned-placeholder>",
-  "release": "rhdh-scaffold-v0",
+  "operationsSha256": "156587d3aca078674d48337256896218bd77c439902be2ec0333c5038a8280e0",
+  "release": "rhdh-v1",
   "placement": {
     "harnessId": "openclaw",
     "mode": "dedicated",
@@ -14,7 +14,7 @@
     "account": {
       "label": "RHDH backend token",
       "issuer": "https://rhdh.example.com",
-      "tokenEndpoint": "https://rhdh.example.com/placeholder/token-endpoint",
+      "tokenEndpoint": "https://rhdh.example.com/api/token",
       "delivery": {
         "role": "harness",
         "env": "RHDH_TOKEN",
@@ -22,20 +22,20 @@
       }
     }
   },
-  "skill": "rhdh-catalog",
-  "skillSha256": "sha256:<unpinned-placeholder>",
-  "executable": "tbd-cli",
-  "version": "0.0.0",
+  "skill": "rhdh",
+  "skillSha256": "99e8dac3cb78df62d8112bec0a3bea4580e5b9cf3a5318490c0fd59e08e4a799",
+  "executable": "rhdh",
+  "version": "1.0.0",
   "artifacts": {
     "linux-amd64": {
-      "url": "https://placeholder.invalid/oce-rhdh/tbd-cli-0.0.0-linux-amd64.tar.gz",
-      "archiveSha256": "sha256:<unpinned-placeholder>",
-      "binarySha256": "sha256:<unpinned-placeholder>"
+      "url": "https://raw.githubusercontent.com/JslYoon/openclaw-enterprise/rhdh-plugin/apps/controller/plugins/oce-rhdh/bin/rhdh.mjs",
+      "archiveSha256": "a183129c3e76352ae87e9bf03afd3f4e7841375d3d5d287bd332123156a84e95",
+      "binarySha256": "a183129c3e76352ae87e9bf03afd3f4e7841375d3d5d287bd332123156a84e95"
     },
     "linux-arm64": {
-      "url": "https://placeholder.invalid/oce-rhdh/tbd-cli-0.0.0-linux-arm64.tar.gz",
-      "archiveSha256": "sha256:<unpinned-placeholder>",
-      "binarySha256": "sha256:<unpinned-placeholder>"
+      "url": "https://raw.githubusercontent.com/JslYoon/openclaw-enterprise/rhdh-plugin/apps/controller/plugins/oce-rhdh/bin/rhdh.mjs",
+      "archiveSha256": "a183129c3e76352ae87e9bf03afd3f4e7841375d3d5d287bd332123156a84e95",
+      "binarySha256": "a183129c3e76352ae87e9bf03afd3f4e7841375d3d5d287bd332123156a84e95"
     }
   },
   "runtimeDirectory": "/usr/local/lib/oce/plugins/rhdh"
